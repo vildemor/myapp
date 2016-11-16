@@ -1,0 +1,16 @@
+<h1>Listing events</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+  </tr>
+
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= event.title %></td>
+      <td><%= event.text %></td>
+      <td><%= link_to 'Show', event_path(event) %></td>
+    </tr>
+  <%end%>
+</table>
