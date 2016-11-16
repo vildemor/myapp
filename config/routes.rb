@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get 'users/new'
 
-  resources :events
+  resources :events do
+    resources :comments
+  end
 
   root 'welcome#index'
 
