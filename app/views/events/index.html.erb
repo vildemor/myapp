@@ -21,3 +21,16 @@
     </tr>
   <%end%>
 </table>
+
+<br>
+<h2> Search Events </h2>
+<%= form_tag(events_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search" %>
+<%= submit_tag "Enter" %>
+<% end %>
+
+<% if @events.present? %>
+  <%= render @events %>
+<% else %>
+  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+<% end %>
