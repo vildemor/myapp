@@ -23,6 +23,16 @@
 </p>
 
 <p>
+  <%= f.label :location %><br>
+  <%= f.select :location, %w(Fitzrovia Bloomsbury City Camden SoHo Angel) %>
+</p>
+
+<p>
+  <%= f.label :category %><br>
+  <%= f.select :category, %w(Programming DataAnalytics Writing Mathematics Other) %>
+</p>
+
+<p>
   <%= f.submit %>
 </p>
 

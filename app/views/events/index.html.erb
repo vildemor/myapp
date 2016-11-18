@@ -24,6 +24,8 @@
           <tr>
             <td><%= event.title %></td>
             <td><%= event.text %></td>
+            <td><%= event.location %></td>
+            <td><%= event.category %></td>
             <td><%= link_to 'Show', event_path(event) %></td>
             <td><%= link_to 'Edit', edit_event_path(event) %></td>
             <td><%= link_to 'Delete', event_path(event),
