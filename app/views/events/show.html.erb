@@ -20,21 +20,35 @@
 <p>
   <strong>Available tickets:</strong> <%= @event.available_tickets %>
 </p>
-  <%= link_to event_tickets_path(@event, ticket: {user_id: current_user.id}), method: :post do %>
-    <strong>Book a ticket!</strong>
-<% end %>
 
-<br>
+<% if logged_in? %>
+
+  <% unless has_ticket?%>
+        <% if time_surpassed? %>
+          <% if tickets_left? %>
+            <%= link_to event_tickets_path(@event, ticket: {user_id: current_user.id}), method: :post do %>
+            <strong>Book a ticket!</strong>
+            <% end %>
+          <%end%>
+        <%end%>
+        <% else %>
+        Looks like you already have a ticket for this event :)
+    <%end%>
+    <br>
+    <% if is_host? %>
+        <%= link_to 'Edit this event', edit_event_path(@event) %><br>
+        <%= link_to 'Delete this event', @event, :confirm => 'Are you sure?',
+                    :method => :delete %></td>
+      <% end %>
+
+
 <br>
 <h2>Comments</h2>
 <%= render @event.comments %>
 
-<% if logged_in? %>
-<strong>Add a comment!</strong>
 <%= render 'comments/form' %>
-
-<% if is_host? %>
-<%= link_to 'Edit', edit_event_path(@event) %>
-    <% end %>
 <% end %>
+
+<br>
 <%= link_to 'Back', events_path %>
+

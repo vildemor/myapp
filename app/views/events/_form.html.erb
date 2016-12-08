@@ -26,16 +26,14 @@
 
 <p>
    <%= f.label :start_date %>
-   <br>
    <%= f.date_select :start_date, :start_year => 1900%>
-   <br>
    <%= f.label :start_time %>
-   <br>
    <%= f.time_select :start_time %>
-   <br>
-
-
-    </p>
+   <%= f.label :end_date %>
+   <%= f.date_select :end_date%>
+   <%= f.label :end_time%>
+   <%= f.time_select :end_time%>
+</p>
 
 <p>
   <%= f.label :location %><br>

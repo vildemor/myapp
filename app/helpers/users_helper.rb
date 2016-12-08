@@ -17,7 +17,7 @@ module UsersHelper
   end
 
   def has_ticket?
-    !Ticket.where(:event_id => event.id, :user_id => current_user.id).all.blank?
+    !Ticket.where(:event_id => @event.id, :user_id => current_user.id).all.blank?
   end
 
   def hosting_events

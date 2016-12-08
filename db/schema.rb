@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208163411) do
+ActiveRecord::Schema.define(version: 20161208193628) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "commenter"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20161208163411) do
     t.decimal  "available_tickets"
     t.integer  "host_id"
     t.integer  "tickets_sold"
+    t.datetime "end_date"
+    t.time     "end_time"
   end
 
   create_table "tickets", force: :cascade do |t|

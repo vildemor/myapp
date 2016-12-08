@@ -1,6 +1,16 @@
-<h1>Management Science Events</h1>
-<%= link_to 'My Events', controller: 'events' %>
+<h1>Management Science Events</h1><br>
+<h2>Welcome to the Management Science Events platform! You can browse events, book tickets to the events you are interested in, and create your own events. </h2>
 
-<br>
-<br>
-<%= link_to 'Search Events', events_path %>
+<% if logged_in? %>
+    <%= link_to 'Search upcoming events', events_path %>
+    <br><br>
+    <%= link_to 'Create your own event', new_event_path %>
+
+<% else %>
+
+    <strong>You have to log in to use this service</strong>
+    <br>
+    <br>
+    Sign up <%= link_to 'here,', signup_path %>
+    or log in <%= link_to 'here!', login_path %>
+<% end %>
