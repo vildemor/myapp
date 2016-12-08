@@ -48,7 +48,13 @@
 </p>
 
 <p>
+  <%= f.label :available_tickets, value:"Available tickets", :id => "ticket_label"%><br>
+  <%= f.number_field :available_tickets, :class => "required" %>
+</p>
+
+<p>
   <%= f.submit %>
 </p>
 
 <% end %>
+

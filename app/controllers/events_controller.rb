@@ -15,6 +15,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @user = User.new
   end
 
   def edit
@@ -23,7 +24,10 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-
+    @event.tickets_sold = 0
+    if logged_in?
+      @event.host_id = current_user.id
+    end
     if @event.save
       redirect_to @event
     else
@@ -50,7 +54,7 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:title, :text, :start_date, :start_time, :location)
+    params.require(:event).permit(:title, :text, :start_date, :start_time, :location, :category, :available_tickets, :tickets_sold, :user_id)
   end
 
 end

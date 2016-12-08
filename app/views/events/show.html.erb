@@ -1,10 +1,9 @@
 <p>
-  <strong>Title:</strong>
-  <%= @event.title %>
+  <strong><%= @event.title %></strong>
 </p>
 
 <p>
-  <strong>Text:</strong>
+  <br>
   <%= @event.text %>
 </p>
 
@@ -18,11 +17,20 @@
   <%= @event.category %>
 </p>
 
+<p>
+  <strong>Available tickets:</strong> <%= @event.available_tickets %>
+</p>
+  <%= link_to event_tickets_path(@event, ticket: {user_id: current_user.id}), method: :post do %>
+    <strong>Book a ticket!</strong>
+<% end %>
+
+<br>
+<br>
 <h2>Comments</h2>
 <%= render @event.comments %>
 
 
-<h2>Add a comment:</h2>
+<strong>Add a comment!</strong>
 <%= render 'comments/form' %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
