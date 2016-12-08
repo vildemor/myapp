@@ -8,12 +8,49 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
-      <p>
-        Events you are hosting:
-      </p><br>
-      <p>
+      <strong>
         Events you are attending:
-      </p>
+      </strong><br>
+      <table>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% attending_events.each do |event| %>
+        <tr>
+          <td><%= event.title %></td>
+          <td><%= event.start_date.to_date %></td>
+          <td><%= event.text %></td>
+        </tr>
+        <% end %>
+        </tbody>
+      </table><br>
+      <strong>
+        Events you are hosting:
+      </strong><br>
+      <table>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% hosting_events.each do |event| %>
+            <tr>
+              <td><%= event.title %></td>
+              <td><%= event.start_date.to_date %></td>
+              <td><%= event.text %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table><br>
+
     </section>
   </aside>
 </div>
