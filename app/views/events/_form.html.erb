@@ -1,58 +1,74 @@
 <%= form_for @event do |f| %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:
-      </h2>
-      <ul>
-        <% @event.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
+    <% if logged_in? %>
+
+      <% if @event.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:
+        </h2>
+        <ul>
+          <% @event.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+      <section>
+      <p>
+        <%= f.label :title %><br>
+        <%= f.text_field :title %>
+      </p>
+
+      <p>
+        <%= f.label :text %><br>
+        <%= f.text_area :text %>
+      </p>
+      </section>
+          <table class = "time">
+            <thead>
+            <tr>
+              <th><%= f.label 'Date of event' %></th>
+              <th><%= f.label 'Time of event' %></th>
+              <th><%= f.label 'End date for ticket sales' %></th>
+              <th><%= f.label 'End time for ticket sales'%></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+           <td><%= f.date_select :start_date, :start_year => 2016%></td>
+           <td><%= f.time_select :start_time %></td>
+           <td><%= f.date_select :end_date%></td>
+           <td><%= f.time_select :end_time%></td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+            <tr>
+              <th><%= f.label :location %><br></th>
+              <th><%= f.label :category %></th>
+              <th><%= f.label :available_tickets, value:"Available tickets", :id => "ticket_label"%><br></th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><%= f.select :location, %w(Fitzrovia Bloomsbury City Camden SoHo Angel) %></td>
+              <td><%= f.select :category, %w(Programming DataAnalytics Writing Mathematics Other) %></td>
+              <td><%= f.number_field :available_tickets, :class => "required" %></td>
+            </tr>
+            </tbody>
+          </table>
+      <p>
+        <%= f.submit %>
+      </p>
+
+    <% else %>
+        <strong>You have to log in to use this service</strong><br>
+        <%= link_to 'Sign up here!', signup_path %><br>
+        <%= link_to 'Log in here!', login_path %>
+    <% end %>
+
 <% end %>
-
-<p>
-  <%= f.label :title %><br>
-  <%= f.text_field :title %>
-</p>
-
-<p>
-  <%= f.label :text %><br>
-  <%= f.text_area :text %>
-</p>
-
-
-
-<p>
-   <%= f.label :start_date %>
-   <%= f.date_select :start_date, :start_year => 1900%>
-   <%= f.label :start_time %>
-   <%= f.time_select :start_time %>
-   <%= f.label :end_date %>
-   <%= f.date_select :end_date%>
-   <%= f.label :end_time%>
-   <%= f.time_select :end_time%>
-</p>
-
-<p>
-  <%= f.label :location %><br>
-  <%= f.select :location, %w(Fitzrovia Bloomsbury City Camden SoHo Angel) %>
-</p>
-
-<p>
-  <%= f.label :category %><br>
-  <%= f.select :category, %w(Programming DataAnalytics Writing Mathematics Other) %>
-</p>
-
-<p>
-  <%= f.label :available_tickets, value:"Available tickets", :id => "ticket_label"%><br>
-  <%= f.number_field :available_tickets, :class => "required" %>
-</p>
-
-<p>
-  <%= f.submit %>
-</p>
-
-<% end %>
-

@@ -1,54 +1,72 @@
+
+<h1><%= @event.title %></h1>
+
+<h3>About this event</h3>
+<p id="description">
+  <%= @event.text %><br>
+  This event will be held in <strong><%= @event.location %></strong>,
+  and is in the <strong><%= @event.category %></strong> category.
+</p>
+<br>
+
+
+<h4>Ticket information</h4>
 <p>
-  <strong><%= @event.title %></strong>
+  There are currently <strong><%= @event.available_tickets %></strong> available tickets for this event.
+  Ticket sales last until <%= @event.end_time.strftime("%I:%M%p") %> on <%= @event.end_date.to_date %>.
 </p>
 
-<p>
-  <br>
-  <%= @event.text %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @event.category %>
-</p>
-
-<p>
-  <strong>Available tickets:</strong> <%= @event.available_tickets %>
-</p>
 
 <% if logged_in? %>
 
   <% unless has_ticket?%>
         <% if time_surpassed? %>
           <% if tickets_left? %>
-            <%= link_to event_tickets_path(@event, ticket: {user_id: current_user.id}), method: :post do %>
-            <strong>Book a ticket!</strong>
+            <p id="ticket"><%= link_to event_tickets_path(@event, ticket: {user_id: current_user.id}), method: :post do %>
+            <strong>Book a ticket!</strong></p>
             <% end %>
+                <% else %>
+                <p>Looks like there are no tickets left for this event.</p>
           <%end%>
+            <% else %>
+            <p>Looks like the ticket sale is no longer on for this event.</p>
         <%end%>
         <% else %>
-        Looks like you already have a ticket for this event :)
+        <p>Looks like you already have a ticket for this event :)</p>
     <%end%>
-    <br>
+
     <% if is_host? %>
-        <%= link_to 'Edit this event', edit_event_path(@event) %><br>
-        <%= link_to 'Delete this event', @event, :confirm => 'Are you sure?',
-                    :method => :delete %></td>
-      <% end %>
+        <section>
+          <h5>Tickets sold</h5>
+          So far <%= @event.tickets_sold %> out of <%= @event.available_tickets + @event.tickets_sold %> tickets have been sold.
+        </section>
+        <br>
+        <section>
+          <h4>People attending your event</h4>
+          <%= render 'attending_guests' %>
+        </section>
+        <% end %>
+    <br>
+    <% if !time_surpassed? %>
+            <h3>Ratings</h3>
+            <br>
+            Helpfulness: <%= rating_for @event, "helpfulness", enable_half: true, cancel_place: 'right' %>
+            Relevance: <%= rating_for @event, "relevance", enable_half: true, cancel_place: 'right' %>
+            Host: <%= rating_for @event, "host", enable_half: true, cancel_place: 'right' %>
+            Original Score: <%= rating_for @event, "original_score", disable_after_rate: true, imdb_avg: true, cancel_place: 'right' %>
+    <br>
+    <h3>Comments</h3>
+    <%= render @event.comments %>
+    <%= render 'comments/form' %>
+    <% end %>
 
-
-<br>
-<h2>Comments</h2>
-<%= render @event.comments %>
-
-<%= render 'comments/form' %>
 <% end %>
 
+<% if is_host? %>
+    <br>
+    <%= link_to 'Edit this event', edit_event_path(@event) %><br>
+    <%= link_to 'Delete this event', @event, :confirm => 'Are you sure?',
+                :method => :delete %></td>
+<% end %>
 <br>
-<%= link_to 'Back', events_path %>
-
+<%= link_to 'Go back to all events', events_path %>

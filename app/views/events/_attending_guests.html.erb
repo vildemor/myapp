@@ -1,0 +1,19 @@
+<p></p>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>More information</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% attending_guests(@event).each do |user| %>
+
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= link_to 'User profile', user_path(user)%></td>
+      </tr>
+
+  <% end %>
+  </tbody>
+</table>

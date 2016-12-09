@@ -20,7 +20,6 @@
   <% if @events.present? %>
     <tr>
       <th>Title</th>
-      <th>Text</th>
       <th>Location</th>
       <th>Category</th>
       <th>Date and time</th>
@@ -30,14 +29,12 @@
         <% @events.each do |event| %>
             <tr>
               <td><%= event.title %></td>
-              <td><%= event.text %></td>
               <td><%= event.location%></td>
               <td><%= event.category%></td>
               <td>On <%= event.start_date.to_date%> at <%= event.start_time.strftime("%I:%M%p")%></td>
               <td><%= event.available_tickets%></td>
-              <td><%= link_to 'Learn more and book tickets!', event_path(event) %></td>
+              <td><%= link_to 'Learn more and book tickets', event_path(event) %></td>
             </tr>
-
         <%end%>
       </table>
   <% else %>

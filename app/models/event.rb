@@ -6,9 +6,9 @@ class Event < ApplicationRecord
                     length: { minimum: 5}
   validates :location, presence: true
   validates :category, presence: true
-
+  ratyrate_rateable 'helpfulness', 'relevance', 'host', 'original_score'
 def self.search(search)
-  where("title LIKE ? OR text LIKE ?", "%#{search}%", "%#{search}%")
+  where("title LIKE ? OR text LIKE ? OR category LIKE ? OR location LIKE ? ", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
 end
 
 end

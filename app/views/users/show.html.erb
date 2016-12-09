@@ -8,15 +8,21 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
-      <strong>
-        Events you are attending:
-      </strong><br>
+      </section>
+
+    <section id="attending">
+      <h4>
+        Events you are attending
+      </h4>
+      <br>
       <table>
         <thead>
         <tr>
           <th>Title</th>
           <th>Date</th>
-          <th>Description</th>
+          <th>Category</th>
+          <th>Location</th>
+          <th>More information</th>
         </tr>
         </thead>
         <tbody>
@@ -24,22 +30,28 @@
         <tr>
           <td><%= event.title %></td>
           <td><%= event.start_date.to_date %></td>
-          <td><%= event.text %></td>
+          <td><%= event.category %></td>
+          <td><%= event.location %></td>
+          <td><%= link_to 'Event page', event_path(event) %></td>
         </tr>
         <% end %>
         </tbody>
       </table><br>
+    </section>
 
-
-      <strong>
-        Events you are hosting:
-      </strong><br>
+<section id="hosting">
+      <h4>
+        Events you are hosting
+      </h4>
+  <br>
       <table>
         <thead>
         <tr>
           <th>Title</th>
           <th>Date</th>
-          <th>Description</th>
+          <th>Category</th>
+          <th>Location</th>
+          <th>More information</th>
         </tr>
         </thead>
         <tbody>
@@ -47,8 +59,9 @@
             <tr>
               <td><%= event.title %></td>
               <td><%= event.start_date.to_date %></td>
-              <td><%= event.text %></td>
-            </tr>
+              <td><%= event.category %></td>
+              <td><%= event.location %></td>
+              <td><%= link_to 'Event page', event_path(event) %></td>
         <% end %>
         </tbody>
       </table><br>
