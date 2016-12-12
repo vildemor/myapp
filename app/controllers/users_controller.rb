@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in @user
-      redirect_to events_path
+      redirect_to welcome_index_path
     else
       render 'errors'
     end

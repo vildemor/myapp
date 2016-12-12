@@ -7,7 +7,7 @@ class TicketsController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
     @ticket = @event.tickets.create(ticket_params)
-    flash[:notice] = "Ticket booking confirmed"
+    flash[:notice] = "Your ticket was booked!"
     new_available_tickets = @event.available_tickets - 1
     new_tickets_sold = @event.tickets_sold + 1
     @event.update(available_tickets: new_available_tickets, tickets_sold: new_tickets_sold)

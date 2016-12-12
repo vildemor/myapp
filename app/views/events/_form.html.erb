@@ -29,17 +29,17 @@
             <thead>
             <tr>
               <th><%= f.label 'Date of event' %></th>
-              <th><%= f.label 'Time of event' %></th>
+              <th><%= f.label 'Start time of event' %></th>
+              <th><%= f.label 'End time for event'%></th>
               <th><%= f.label 'End date for ticket sales' %></th>
-              <th><%= f.label 'End time for ticket sales'%></th>
             </tr>
             </thead>
             <tbody>
             <tr>
            <td><%= f.date_select :start_date, :start_year => 2016%></td>
            <td><%= f.time_select :start_time %></td>
-           <td><%= f.date_select :end_date%></td>
-           <td><%= f.time_select :end_time%></td>
+           <td><%= f.date_select :end_time%></td>
+           <td><%= f.time_select :end_date%></td>
             </tr>
             </tbody>
           </table>

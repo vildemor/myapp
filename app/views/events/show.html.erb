@@ -6,6 +6,8 @@
   <%= @event.text %><br>
   This event will be held in <strong><%= @event.location %></strong>,
   and is in the <strong><%= @event.category %></strong> category.
+  This event is on <strong><%= @event.start_date.to_date %></strong> from <strong><%= @event.start_time.strftime("%I:%M%p") %></strong>
+  to <strong><%= @event.end_time.strftime("%I:%M%p") %></strong>
 </p>
 <br>
 
@@ -13,7 +15,7 @@
 <h4>Ticket information</h4>
 <p>
   There are currently <strong><%= @event.available_tickets %></strong> available tickets for this event.
-  Ticket sales last until <%= @event.end_time.strftime("%I:%M%p") %> on <%= @event.end_date.to_date %>.
+  Ticket sales last until <%= @event.end_date.to_date %>.
 </p>
 
 
@@ -28,10 +30,10 @@
                 <% else %>
                 <p>Looks like there are no tickets left for this event.</p>
           <%end%>
-            <% else %>
+        <% else %>
             <p>Looks like the ticket sale is no longer on for this event.</p>
         <%end%>
-        <% else %>
+    <% else %>
         <p>Looks like you already have a ticket for this event :)</p>
     <%end%>
 
@@ -48,17 +50,19 @@
         <% end %>
     <br>
     <% if !time_surpassed? %>
+        <% if has_ticket? %>
             <h3>Ratings</h3>
             <br>
-            Helpfulness: <%= rating_for @event, "helpfulness", enable_half: true, cancel_place: 'right' %>
-            Relevance: <%= rating_for @event, "relevance", enable_half: true, cancel_place: 'right' %>
-            Host: <%= rating_for @event, "host", enable_half: true, cancel_place: 'right' %>
-            Original Score: <%= rating_for @event, "original_score", disable_after_rate: true, imdb_avg: true, cancel_place: 'right' %>
-    <br>
-    <h3>Comments</h3>
-    <%= render @event.comments %>
-    <%= render 'comments/form' %>
-    <% end %>
+            Helpfulness <%= rating_for @event, "helpfulness", enable_half: true, cancel_place: 'right' %>
+            Relevance <%= rating_for @event, "relevance", enable_half: true, cancel_place: 'right' %>
+            Host <%= rating_for @event, "host", enable_half: true, cancel_place: 'right' %>
+            Original Score <%= rating_for @event, "original_score", disable_after_rate: true, imdb_avg: true, cancel_place: 'right' %>
+      <br>
+      <h3>Comments</h3>
+      <%= render @event.comments %>
+      <%= render 'comments/form' %>
+      <% end %>
+        <% end %>
 
 <% end %>
 
